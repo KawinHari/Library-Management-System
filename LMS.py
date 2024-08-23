@@ -37,7 +37,20 @@ class LMS:
         else:
             print("Book ID not found !!!")
             return self.Issue_books()
- 
+    
+    def add_books(self):
+        new_books=input("Enter Book title: ")
+        if new_books == "":
+            return self.add_books()
+        elif len(new_books)>25:
+            print("The charector is too long ")
+            return self.add_books()
+        else:
+            with open(self.list_of_books,"a") as bk:
+                bk.writelines(f"{new_books}\n")
+                self.books_dict.update({str(int(max(self.books_dict))+1):{"books_title":new_books,"lender_name":"","Issue_date":"","status":"Available"}})
+                
+
 
 
 lms=LMS("list_of_books.txt","Python library")
